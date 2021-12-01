@@ -4,6 +4,8 @@ import { ApolloClient, ApolloProvider, InMemoryCache, createHttpLink } from '@ap
 
 import { setContext } from '@apollo/client/link/context';
 
+import SearchRecipes from './pages/SearchRecipes';
+import SavedRecipes from './pages/SavedRecipes';
 import Navbar from './components/Navbar';
 
 // Construct our main GraphQL API endpoint
@@ -37,6 +39,8 @@ function App() {
         <>
           <Navbar />
           <Switch>
+            <Route exact path="/" component={SearchRecipes} />
+            <Route exact path="/saved" component={SavedRecipes} />
             <Route render={() => <h1 className="display-2">Wrong page!</h1>} />
           </Switch>
         </>

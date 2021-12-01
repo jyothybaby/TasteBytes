@@ -23,3 +23,40 @@ mutation addUser($username: String!, $email: String!, $password: String!) {
     }
   }
 `;
+export const SAVE_RECIPE = gql`
+  mutation saveRecipe($recipeData: RecipeInput!) {
+    saveRecipe(recipeData: $recipeData) {
+      _id
+      username
+      email
+      savedRecipes {
+        recipeId
+        authors
+        image
+        description
+        title
+        link
+      }
+    }
+  }
+`;
+
+export const REMOVE_RECIPE = gql`
+  mutation removeRecipe($recipeId: ID!) {
+    removeRecipe(recipeId: $recipeId) {
+      _id
+      username
+      email
+      savedRecipes {
+        recipeId
+        authors
+        image
+        description
+        title
+        link
+      }
+    }
+  }
+
+`;
+
