@@ -35,21 +35,21 @@ const SearchRecipes = () => {
 
     try {
       const response = await fetch(
-        `https://www.googleapis.com/books/v1/volumes?q=${searchInput}`
+        `https://api.edamam.com/api/recipes/v2?type=public&q=${searchInput}&app_id=52309fd4&app_key=4bff4f40f5a3de152a5affb23e736abb`
       );
 
       if (!response.ok) {
         throw new Error('something went wrong!');
       }
 
-      const { items } = await response.json();
+      const { hits } = await response.json();
 
-      const recipeData = items.map((recipe) => ({
-        recipeId: recipe.id,
-        authors: recipe.volumeInfo.authors || ['No author to display'],
-        title: recipe.volumeInfo.title,
-        description: recipe.volumeInfo.description,
-        image: recipe.volumeInfo.imageLinks?.thumbnail || '',
+      const recipeData = hits.map((recipeData) => ({
+        recipeId: recipeData.recipe.uri.split('recipe_')[1],
+        authors: recipeData.recipe.ingredientLines || ['No author to display'],
+        title: recipeData.recipe.label,
+        description: recipeData.recipe.source,
+        image: recipeData.recipe.image || '',
       }));
 
       setSearchedRecipes(recipeData);
@@ -127,8 +127,8 @@ const SearchRecipes = () => {
                 ) : null}
                 <Card.Body>
                   <Card.Title>{recipe.title}</Card.Title>
-                  <p className="small">Authors: {recipe.authors}</p>
-                  <Card.Text>{recipe.description}</Card.Text>
+                  <p className="small">Ingredients: {recipe.authors}</p>
+                  <Card.Text>Source: {recipe.description}</Card.Text>
                   {Auth.loggedIn() && (
                     <Button
                       disabled={savedRecipeIds?.some(
