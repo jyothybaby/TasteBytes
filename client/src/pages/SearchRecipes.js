@@ -46,9 +46,9 @@ const SearchRecipes = () => {
 
       const recipeData = hits.map((recipeData) => ({
         recipeId: recipeData.recipe.uri.split('recipe_')[1],
-        authors: recipeData.recipe.ingredientLines || ['No author to display'],
+        ingredientLines: recipeData.recipe.ingredientLines || ['No author to display'],
         title: recipeData.recipe.label,
-        description: recipeData.recipe.source,
+        source: recipeData.recipe.source,
         image: recipeData.recipe.image || '',
       }));
 
@@ -127,8 +127,10 @@ const SearchRecipes = () => {
                 ) : null}
                 <Card.Body>
                   <Card.Title>{recipe.title}</Card.Title>
-                  <p className="small">Ingredients: {recipe.authors}</p>
-                  <Card.Text>Source: {recipe.description}</Card.Text>
+                  <ul>
+                    {recipe.ingredientLines.map(line=>(<li>{line}</li>))}
+                  </ul>
+                  <Card.Text>Source: {recipe.source}</Card.Text>
                   {Auth.loggedIn() && (
                     <Button
                       disabled={savedRecipeIds?.some(
@@ -138,7 +140,7 @@ const SearchRecipes = () => {
                       onClick={() => handleSaveRecipe(recipe.recipeId)}
                     >
                       {savedRecipeIds?.some((savedId) => savedId === recipe.recipeId)
-                        ? 'Recipe Already Saved!'
+                        ? 'Recipe Saved!'
                         : 'Save This Recipe!'}
                     </Button>
                   )}

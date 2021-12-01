@@ -10,8 +10,8 @@ const typeDefs = gql`
     }
     type Recipe {
         recipeId: ID!
-        authors: [String]
-        description: String
+        ingredientLines: [String]
+        source: String
         image: String
         link: String
         title: String!
@@ -22,8 +22,8 @@ const typeDefs = gql`
       }
 
     input RecipeInput {
-        authors: [String]
-        description: String!
+        ingredientLines: [String]
+        source: String!
         recipeId: String!
         image: String
         link: String

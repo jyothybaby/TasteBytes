@@ -31,9 +31,9 @@ export const SAVE_RECIPE = gql`
       email
       savedRecipes {
         recipeId
-        authors
+        ingredientLines
         image
-        description
+        source
         title
         link
       }
@@ -49,9 +49,9 @@ export const REMOVE_RECIPE = gql`
       email
       savedRecipes {
         recipeId
-        authors
+        ingredientLines
         image
-        description
+        source
         title
         link
       }
