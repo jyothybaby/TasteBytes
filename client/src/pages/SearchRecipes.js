@@ -35,7 +35,7 @@ const SearchRecipes = () => {
 
     try {
       const response = await fetch(
-        `https://api.edamam.com/api/recipes/v2?type=public&q=${searchInput}&app_id=52309fd4&app_key=4bff4f40f5a3de152a5affb23e736abb`
+        `https://api.edamam.com/api/recipes/v2?type=public&q=${searchInput}&app_id=${process.env.REACT_APP_APP_ID}&app_key=${process.env.REACT_APP_API_KEY}`
       );
 
       if (!response.ok) {
