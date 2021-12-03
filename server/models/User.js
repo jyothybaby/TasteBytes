@@ -3,6 +3,8 @@ const bcrypt = require('bcrypt');
 
 // import schema from Recipe.js
 const recipeSchema = require('./Recipe');
+const inventorySchema = require('./Inventory');
+
 
 const userSchema = new Schema(
   {
@@ -23,6 +25,7 @@ const userSchema = new Schema(
     },
     // set savedRecipes to be an array of data that adheres to the recipeSchema
     savedRecipes: [recipeSchema],
+    savedInventories: [inventorySchema],
   },
   // set this to use virtual below
   {
@@ -50,6 +53,10 @@ userSchema.methods.isCorrectPassword = async function (password) {
 // when we query a user, we'll also get another field called `recipeCount` with the number of saved recipes we have
 userSchema.virtual('recipeCount').get(function () {
   return this.savedRecipes.length;
+});
+
+userSchema.virtual('inventoryCount').get(function () {
+  return this.savedInventories.length;
 });
 
 const User = model('User', userSchema);

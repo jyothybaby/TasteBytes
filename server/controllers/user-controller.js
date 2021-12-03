@@ -70,4 +70,20 @@ module.exports = {
     }
     return res.json(updatedUser);
   },
+
+  // save an inventory to a user's "savedInventoies" fileld by adding it to the set (to prevent duplicates)
+  async saveInventory({ user, body }, res) {
+    console.log(user);
+    try {
+      const updatedUser = await User.findOneAndUpdate(
+        { _id: user._id },
+        { $addToSet: { savedInventories: body } },
+        { new: true, runValidators: true }
+      );
+      return res.json(updatedUser);
+    } catch (err) {
+      console.log(err);
+      return res.status(400).json(err);
+    }
+  },
 };

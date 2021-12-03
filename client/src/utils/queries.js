@@ -17,3 +17,16 @@ export const QUERY_ME = gql`
     }
   }
 `;
+
+export const QUERY_INVENTORY = gql`
+  {
+    me {
+      _id
+      username
+      email
+      savedInventories {
+        inventoryLines
+      }
+    }
+  }
+`;

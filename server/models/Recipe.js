@@ -11,7 +11,7 @@ const recipeSchema = new Schema({
     type: String,
     required: true,
   },
-  // saved recipe id from GoogleRecipes
+  // saved recipe id from Thirdparty Api
   recipeId: {
     type: String,
     required: true,

@@ -61,7 +61,19 @@ const resolvers = {
         return updatedUser;
       }
       throw new AuthenticationError('Log in is required');
-    },  
+    }, 
+    
+    saveInventory: async (parent, { inventoryData }, context) => {
+      if (context.user) {
+        const updatedUser = await User.findByIdAndUpdate(
+          { _id: context.user._id },
+          { $push: { savedInventories: inventoryData } },
+          { new: true }
+        );
+        return updatedUser;
+      }
+      throw new AuthenticationError('Log in is required.');
+    },
   },
 };
 

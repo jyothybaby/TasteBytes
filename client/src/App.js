@@ -6,6 +6,7 @@ import { setContext } from '@apollo/client/link/context';
 
 import SearchRecipes from './pages/SearchRecipes';
 import SavedRecipes from './pages/SavedRecipes';
+import SavedInventories from './pages/SavedInventories';
 import Navbar from './components/Navbar';
 
 // Construct our main GraphQL API endpoint
@@ -41,6 +42,7 @@ function App() {
           <Switch>
             <Route exact path="/" component={SearchRecipes} />
             <Route exact path="/saved" component={SavedRecipes} />
+            <Route exact path="/savedInventory" component={SavedInventories} />
             <Route render={() => <h1 className="display-2">Wrong page!</h1>} />
           </Switch>
         </>

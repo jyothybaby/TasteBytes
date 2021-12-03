@@ -40,6 +40,18 @@ export const saveRecipe = (recipeData, token) => {
   });
 };
 
+// save inventory data for a logged in user
+export const saveInventory = (inventoryData, token) => {
+  return fetch('/api/users', {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+      authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify(inventoryData),
+  });
+};
+
 // remove saved recipe data for a logged in user
 export const deleteRecipe = (recipeId, token) => {
   return fetch(`/api/users/recipes/${recipeId}`, {

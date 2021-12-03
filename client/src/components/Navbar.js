@@ -23,12 +23,16 @@ const AppNavbar = () => {
               <Nav.Link as={Link} to='/'>
                 Search For Recipes
               </Nav.Link>
-              {/* if user is logged in show saved recipes and logout */}
+              {/* if user is logged in show saved recipes, Inventorylist, Grocery list and logout */}
               {Auth.loggedIn() ? (
                 <>
                   <Nav.Link as={Link} to='/saved'>
                     See Your Recipes
                   </Nav.Link>
+                  <Nav.Link as={Link} to='/savedInventory'>
+                    Inventory List
+                  </Nav.Link>
+
                   <Nav.Link onClick={Auth.logout}>Logout</Nav.Link>
                 </>
               ) : (

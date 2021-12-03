@@ -60,3 +60,16 @@ export const REMOVE_RECIPE = gql`
 
 `;
 
+
+export const SAVE_INVENTORY = gql`
+  mutation saveInventory($inventoryData: InventoryInput!) {
+    saveInventory(inventoryData: $inventoryData) {
+      _id
+      username
+      email
+      savedInventories {
+        inventoryLines
+      }
+    }
+  }
+`;
