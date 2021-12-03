@@ -49,6 +49,7 @@ const SearchRecipes = () => {
         ingredientLines: recipeData.recipe.ingredientLines || ['No author to display'],
         title: recipeData.recipe.label,
         source: recipeData.recipe.source,
+        ingredients: recipeData.recipe.ingredients.map((ingred) => ingred.food),
         image: recipeData.recipe.image || '',
       }));
 

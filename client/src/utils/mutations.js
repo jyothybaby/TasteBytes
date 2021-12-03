@@ -36,6 +36,7 @@ export const SAVE_RECIPE = gql`
         source
         title
         link
+        ingredients
       }
     }
   }
@@ -54,6 +55,7 @@ export const REMOVE_RECIPE = gql`
         source
         title
         link
+        ingredients
       }
     }
   }

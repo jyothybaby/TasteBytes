@@ -17,6 +17,8 @@ const typeDefs = gql`
         image: String
         link: String
         title: String!
+        ingredients: [String]
+
     }
     type Auth {
         token: ID!
@@ -30,6 +32,8 @@ const typeDefs = gql`
         image: String
         link: String
         title: String!
+        ingredients: [String]
+
       }
     type Inventory {
           _id:ID!

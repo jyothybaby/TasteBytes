@@ -22,6 +22,10 @@ const recipeSchema = new Schema({
   link: {
     type: String,
   },
+  ingredients:[ {
+    type: String,
+  }
+],
   title: {
     type: String,
     required: true,
