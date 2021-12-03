@@ -9,6 +9,7 @@ export const QUERY_ME = gql`
       savedRecipes {
         recipeId
         ingredientLines
+        ingredients
         image
         source
         title

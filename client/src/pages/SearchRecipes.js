@@ -131,7 +131,8 @@ const SearchRecipes = () => {
                   <ul>
                     {recipe.ingredientLines.map(line=>(<li>{line}</li>))}
                   </ul>
-                  <Card.Text>Source: {recipe.source}</Card.Text>
+                  <Card.Text><b>Ingredients:</b> {recipe.ingredients.join(', ')}</Card.Text>
+                  <Card.Text><b>Source:</b> {recipe.source}</Card.Text>
                   {Auth.loggedIn() && (
                     <Button
                       disabled={savedRecipeIds?.some(

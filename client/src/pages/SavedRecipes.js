@@ -14,31 +14,7 @@ const SavedRecipes = () => {
 
   const userData = data?.me || {};
 
-  // remove useEffect hook that sets state for userData
-  // useEffect(() => {
-  //   const getUserData = async () => {
-  //     try {
-  //       const token = Auth.loggedIn() ? Auth.getToken() : null;
-
-  //       if (!token) {
-  //         return false;
-  //       }
-
-  //       const response = await getMe(token);
-
-  //       if (!response.ok) {
-  //         throw new Error('something went wrong!');
-  //       }
-
-  //       const user = await response.json();
-  //       setUserData(user);
-  //     } catch (err) {
-  //       console.error(err);
-  //     }
-  //   };
-
-  //   getUserData();
-  // }, [userDataLength]);
+  
 
   // create function that accepts the recipe's mongo _id value as param and deletes the recipe from the database
   const handleDeleteRecipe = async (recipeId) => {
@@ -91,8 +67,11 @@ const SavedRecipes = () => {
                 ) : null}
                 <Card.Body>
                   <Card.Title>{recipe.title}</Card.Title>
-                  <p className="small">Authors: {recipe.ingredientLines}</p>
-                  <Card.Text>{recipe.source}</Card.Text>
+                  <ul>
+                    {recipe.ingredientLines.map(line=>(<li>{line}</li>))}
+                  </ul>
+                  <Card.Text><b>Ingredients:</b> {recipe.ingredients.join(', ')}</Card.Text>
+                  <Card.Text><b>Source:</b> {recipe.source}</Card.Text>
                   <Button
                     className="btn-block btn-danger"
                     onClick={() => handleDeleteRecipe(recipe.recipeId)}
