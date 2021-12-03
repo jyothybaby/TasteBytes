@@ -22,18 +22,17 @@ const SavedInventories = () => {
         </Jumbotron>
         <Container>
           <h2>
-            {userData.savedInventories?.length
-              ? `Viewing ${userData.savedInventories.length} saved ${
-                  userData.savedInventories.length === 1 ? 'inventory' : 'inventories'
+            {userData.savedInventories[0]?.inventoryLines?.length
+              ? `Viewing ${userData.savedInventories[0]?.inventoryLines?.length} saved ${
+                  userData.savedInventories[0]?.inventoryLines?.length === 1 ? 'inventory' : 'inventories'
                 }:`
               : 'You have not saved any inventories!'}
           </h2>
           
-            {userData.savedInventories?.map((inventory) => {
+            {userData.savedInventories[0]?.inventoryLines.map((item) => {
               return (
                 <ul>
-                    <p className="small">Authors: {inventory.inventoryLines}</p>               
-
+                    <li className="small">{item}</li>               
                   </ul>
                  );
             })}
