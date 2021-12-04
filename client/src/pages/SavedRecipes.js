@@ -79,7 +79,7 @@ const SavedRecipes = () => {
 
                   {
                   fetchOutofStockIngredients(recipe.ingredients, userData.savedInventories[0]?.inventoryLines).length > 0 ?
-                  <Card.Text><b>Out-of-stock:</b> {fetchOutofStockIngredients(recipe.ingredients, userData.savedInventories[0]?.inventoryLines)}</Card.Text> : <Card.Text><b>ALL-in-stock, You're good to go!</b></Card.Text>
+                  <div><Card.Text><b>Out-of-stock:</b> {fetchOutofStockIngredients(recipe.ingredients, userData.savedInventories[0]?.inventoryLines)}</Card.Text><Button>Buy Now</Button></div> : <Card.Text><b>ALL-in-stock, You're good to go!</b></Card.Text>
                   }
 
                   
