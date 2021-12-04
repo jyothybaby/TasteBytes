@@ -39,6 +39,10 @@ const SavedRecipes = () => {
     return <h2>LOADING...</h2>;
   }
 
+  function fetchOutofStockIngredients(recipeIngredientsList, inventoryList) {
+    return recipeIngredientsList.filter(x => inventoryList.indexOf(x) === -1).join(', ');
+  }
+
   return (
     <>
       <Jumbotron fluid className="text-light bg-dark">
@@ -72,7 +76,13 @@ const SavedRecipes = () => {
                   </ul>
                   <Card.Text><b>Ingredients:</b> {recipe.ingredients.join(', ')}</Card.Text>
                   <Card.Text><b>Source:</b> {recipe.source}</Card.Text>
-                  <Card.Text><b>Out-of-stock:</b> {recipe.ingredients.filter(x => userData.savedInventories[0]?.inventoryLines.indexOf(x) === -1).join(', ')}</Card.Text>
+
+                  {
+                  fetchOutofStockIngredients(recipe.ingredients, userData.savedInventories[0]?.inventoryLines).length > 0 ?
+                  <Card.Text><b>Out-of-stock:</b> {fetchOutofStockIngredients(recipe.ingredients, userData.savedInventories[0]?.inventoryLines)}</Card.Text> : <Card.Text><b>ALL-in-stock, You're good to go!</b></Card.Text>
+                  }
+
+                  
                   <Button
                     className="btn-block btn-danger"
                     onClick={() => handleDeleteRecipe(recipe.recipeId)}
