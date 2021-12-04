@@ -129,7 +129,7 @@ const SearchRecipes = () => {
                 <Card.Body>
                   <Card.Title>{recipe.title}</Card.Title>
                   <ul>
-                    {recipe.ingredientLines.map(line=>(<li>{line}</li>))}
+                    {recipe.ingredientLines.map(line=> <li key={line.toString()}>{line}</li>)}
                   </ul>
                   <Card.Text><b>Ingredients:</b> {recipe.ingredients.join(', ')}</Card.Text>
                   <Card.Text><b>Source:</b> {recipe.source}</Card.Text>

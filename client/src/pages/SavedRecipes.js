@@ -68,10 +68,11 @@ const SavedRecipes = () => {
                 <Card.Body>
                   <Card.Title>{recipe.title}</Card.Title>
                   <ul>
-                    {recipe.ingredientLines.map(line=>(<li>{line}</li>))}
+                    {recipe.ingredientLines.map(line=><li key={line.toString()}>{line}</li>)}
                   </ul>
                   <Card.Text><b>Ingredients:</b> {recipe.ingredients.join(', ')}</Card.Text>
                   <Card.Text><b>Source:</b> {recipe.source}</Card.Text>
+                  <Card.Text><b>Out-of-stock:</b> {recipe.ingredients.filter(x => userData.savedInventories[0]?.inventoryLines.indexOf(x) === -1).join(', ')}</Card.Text>
                   <Button
                     className="btn-block btn-danger"
                     onClick={() => handleDeleteRecipe(recipe.recipeId)}
