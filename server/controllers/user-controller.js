@@ -92,7 +92,7 @@ module.exports = {
     try {
       const updatedUser = await User.findOneAndUpdate(
         { _id: user._id },
-        { $addToSet: { savedInventories: body } },
+        { $addToSet: { savedInventories: { $each: body} } },
         { new: true, runValidators: true }
       );
       return res.json(updatedUser);

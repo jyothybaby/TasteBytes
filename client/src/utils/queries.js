@@ -15,9 +15,7 @@ export const QUERY_ME = gql`
         title
         link
       }
-      savedInventories {
-        inventoryLines
-      }
+      savedInventories 
     }
   }
 `;
@@ -28,9 +26,7 @@ export const QUERY_INVENTORY = gql`
       _id
       username
       email
-      savedInventories {
-        inventoryLines
-      }
+      savedInventories
     }
   }
 `;

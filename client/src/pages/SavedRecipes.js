@@ -96,10 +96,10 @@ const SavedRecipes = () => {
                   <Card.Text><b>Source:</b> {recipe.source}</Card.Text>
 
                   {
-                  fetchOutofStockIngredients(recipe.ingredients, userData.savedInventories[0]?.inventoryLines).length > 0 ?
-                  <div><Card.Text><b>Out-of-stock:</b> {fetchOutofStockIngredients(recipe.ingredients, userData.savedInventories[0]?.inventoryLines).join(', ')}</Card.Text>
+                  fetchOutofStockIngredients(recipe.ingredients, userData.savedInventories).length > 0 ?
+                  <div><Card.Text><b>Out-of-stock:</b> {fetchOutofStockIngredients(recipe.ingredients, userData.savedInventories).join(', ')}</Card.Text>
                   <Button 
-                    onClick={() => handleAddToShoppingList(fetchOutofStockIngredients(recipe.ingredients, userData.savedInventories[0]?.inventoryLines))}
+                    onClick={() => handleAddToShoppingList(fetchOutofStockIngredients(recipe.ingredients, userData.savedInventories))}
                   >Add To Shopping List</Button></div> : <Card.Text><b>ALL-in-stock, You're good to go!</b></Card.Text>
                   }
 
