@@ -6,11 +6,12 @@ import Auth from '../utils/auth';
 import { removeRecipeId } from '../utils/localStorage';
 import { useQuery, useMutation } from '@apollo/client';
 import { QUERY_ME } from '../utils/queries';
-import { REMOVE_RECIPE } from '../utils/mutations';
+import { REMOVE_RECIPE, SAVE_GROCERY } from '../utils/mutations';
 
 const SavedRecipes = () => {
   const { loading, data } = useQuery(QUERY_ME);
   const [removeRecipe, { error }] = useMutation(REMOVE_RECIPE);
+  const [saveGrocery, { error1 }] = useMutation(SAVE_GROCERY);
 
   const userData = data?.me || {};
 
@@ -35,12 +36,29 @@ const SavedRecipes = () => {
     }
   };
 
+  const handleAddToShoppingList = async (outofStockList) => {
+    // get token
+    const token = Auth.loggedIn() ? Auth.getToken() : null;
+
+    if (!token) {
+      return false;
+    }
+    try {
+      const { data } = await saveGrocery({
+        variables: { groceryData: outofStockList},
+      });
+      
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   if (loading) {
     return <h2>LOADING...</h2>;
   }
 
   function fetchOutofStockIngredients(recipeIngredientsList, inventoryList) {
-    return recipeIngredientsList.filter(x => inventoryList.indexOf(x) === -1).join(', ');
+    return recipeIngredientsList.filter(x => inventoryList.indexOf(x) === -1);
   }
 
   return (
@@ -79,7 +97,10 @@ const SavedRecipes = () => {
 
                   {
                   fetchOutofStockIngredients(recipe.ingredients, userData.savedInventories[0]?.inventoryLines).length > 0 ?
-                  <div><Card.Text><b>Out-of-stock:</b> {fetchOutofStockIngredients(recipe.ingredients, userData.savedInventories[0]?.inventoryLines)}</Card.Text><Button>Buy Now</Button></div> : <Card.Text><b>ALL-in-stock, You're good to go!</b></Card.Text>
+                  <div><Card.Text><b>Out-of-stock:</b> {fetchOutofStockIngredients(recipe.ingredients, userData.savedInventories[0]?.inventoryLines).join(', ')}</Card.Text>
+                  <Button 
+                    onClick={() => handleAddToShoppingList(fetchOutofStockIngredients(recipe.ingredients, userData.savedInventories[0]?.inventoryLines))}
+                  >Add To Shopping List</Button></div> : <Card.Text><b>ALL-in-stock, You're good to go!</b></Card.Text>
                   }
 
                   

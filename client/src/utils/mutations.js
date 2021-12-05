@@ -78,14 +78,12 @@ export const SAVE_INVENTORY = gql`
 
 
 export const SAVE_GROCERY = gql`
-  mutation saveGrocery($groceryData: GroceryInput!) {
+  mutation saveGrocery($groceryData: [String]!) {
     saveGrocery(groceryData: $groceryData) {
       _id
       username
       email
-      savedGroceries {
-        groceryLines
-      }
+      savedGroceries 
     }
   }
 `;

@@ -34,7 +34,7 @@ const AppNavbar = () => {
                   </Nav.Link>
 
                   <Nav.Link as={Link} to='/savedGrocery'>
-                    Grocery List
+                    Shopping List
                   </Nav.Link>
 
                   <Nav.Link onClick={Auth.logout}>Logout</Nav.Link>

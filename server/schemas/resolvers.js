@@ -65,10 +65,11 @@ const resolvers = {
 
     saveGrocery: async (parent, { groceryData }, context) => {
       if (context.user) {
+
         const updatedUser = await User.findByIdAndUpdate(
           { _id: context.user._id },
-          { $push: { savedgroceries: groceryData } },
-          { new: true }
+          { $push: { savedGroceries: { $each: groceryData} } },
+          {new:true}
         );
         return updatedUser;
       }

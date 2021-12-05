@@ -41,9 +41,7 @@ export const QUERY_GROCERY = gql`
       _id
       username
       email
-      savedGroceries {
-        groceryLines
-      }
+      savedGroceries 
     }
   }
 `;

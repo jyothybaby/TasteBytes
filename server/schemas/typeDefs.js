@@ -9,7 +9,7 @@ const typeDefs = gql`
         savedRecipes: [Recipe]
         savedInventories: [Inventory]
         inventoryCount: Int
-        savedGroceries: [Grocery]
+        savedGroceries: [String]
         groceryCount: Int
     }
     type Recipe {
@@ -46,17 +46,6 @@ const typeDefs = gql`
         inventoryLines: [String]  
       }
 
-
-      type Grocery {
-        _id:ID!
-        groceryLines: [String]  
-    }
-
-    input GroceryInput {
-        groceryLines: [String]  
-    }
-    
-
     type Query {
         me: User
     }
@@ -66,7 +55,7 @@ const typeDefs = gql`
         addUser(username: String!, email: String!, password: String!): Auth
         saveRecipe(recipeData: RecipeInput!): User
         saveInventory(inventoryData: InventoryInput!): User
-        saveGrocery(groceryData: GroceryInput!): User
+        saveGrocery(groceryData: [String]!): User
         removeRecipe(recipeId: ID!): User
     }
 

@@ -4,8 +4,6 @@ const bcrypt = require('bcrypt');
 // import schema from Recipe.js
 const recipeSchema = require('./Recipe');
 const inventorySchema = require('./Inventory');
-const grocerySchema = require('./Grocery');
-
 
 const userSchema = new Schema(
   {
@@ -27,7 +25,7 @@ const userSchema = new Schema(
     // set savedRecipes to be an array of data that adheres to the recipeSchema
     savedRecipes: [recipeSchema],
     savedInventories: [inventorySchema],
-    savedGroceries: [grocerySchema],
+    savedGroceries: [String],
   },
   // set this to use virtual below
   {
