@@ -70,6 +70,7 @@ export const SAVE_INVENTORY = gql`
       username
       email
       savedInventories 
+      savedGroceries
     }
   }
 `;

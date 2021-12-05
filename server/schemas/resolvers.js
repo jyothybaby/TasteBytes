@@ -81,7 +81,10 @@ const resolvers = {
       if (context.user) {
         const updatedUser = await User.findByIdAndUpdate(
           { _id: context.user._id },
-          { $push: { savedInventories: { $each: inventoryData} } },
+          { 
+            $addToSet: { savedInventories: { $each: inventoryData} },
+            $set: {savedGroceries: []}
+          },
           { new: true }
         );
         return updatedUser;
