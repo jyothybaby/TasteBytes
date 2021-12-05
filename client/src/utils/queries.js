@@ -34,3 +34,16 @@ export const QUERY_INVENTORY = gql`
     }
   }
 `;
+
+export const QUERY_GROCERY = gql`
+  {
+    me {
+      _id
+      username
+      email
+      savedGroceries {
+        groceryLines
+      }
+    }
+  }
+`;

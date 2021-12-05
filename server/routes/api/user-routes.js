@@ -5,6 +5,7 @@ const {
   saveRecipe,
   deleteRecipe,
   saveInventory,
+  saveGrocery,
   login,
 } = require('../../controllers/user-controller');
 
@@ -12,7 +13,7 @@ const {
 const { authMiddleware } = require('../../utils/auth');
 
 // put authMiddleware anywhere we need to send a token for verification of user
-router.route('/').post(createUser).put(authMiddleware, [saveRecipe,saveInventory]);
+router.route('/').post(createUser).put(authMiddleware, [saveRecipe,saveInventory,saveGrocery]);
 
 router.route('/login').post(login);
 

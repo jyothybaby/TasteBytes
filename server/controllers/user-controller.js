@@ -70,6 +70,21 @@ module.exports = {
     }
     return res.json(updatedUser);
   },
+// Save an grocery list to a user's savedIGroceries
+  async saveGrocery({ user, body }, res) {
+    console.log(user);
+    try {
+      const updatedUser = await User.findOneAndUpdate(
+        { _id: user._id },
+        { $addToSet: { savedGroceries: body } },
+        { new: true, runValidators: true }
+      );
+      return res.json(updatedUser);
+    } catch (err) {
+      console.log(err);
+      return res.status(400).json(err);
+    }
+  },
 
   // save an inventory to a user's "savedInventoies" fileld by adding it to the set (to prevent duplicates)
   async saveInventory({ user, body }, res) {

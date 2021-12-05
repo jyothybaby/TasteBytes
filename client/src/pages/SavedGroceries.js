@@ -2,10 +2,10 @@ import React from 'react';
 import { Jumbotron, Container } from 'react-bootstrap';
 import Auth from '../utils/auth';
 import { useQuery, useMutation } from '@apollo/client';
-import { QUERY_INVENTORY } from '../utils/queries';
+import { QUERY_GROCERY } from '../utils/queries';
 
-const SavedInventories = () => {
-    const { loading, data } = useQuery(QUERY_INVENTORY);
+const SavedGroceries = () => {
+    const { loading, data } = useQuery(QUERY_GROCERY);
     
     const userData = data?.me || {};
    
@@ -17,19 +17,19 @@ const SavedInventories = () => {
       <>
         <Jumbotron fluid className="text-light bg-dark">
           <Container>
-            <h5>Viewing {userData.username}'s inventories!</h5>
+            <h5>Viewing {userData.username}'s Grocery List!</h5>
           </Container>
         </Jumbotron>
         <Container>
           <h2>
-            {userData.savedInventories[0]?.inventoryLines?.length
-              ? `Viewing ${userData.savedInventories[0]?.inventoryLines?.length} saved ${
-                  userData.savedInventories[0]?.inventoryLines?.length === 1 ? 'inventory' : 'inventories'
+            {userData.savedGroceries[0]?.groceryLines?.length
+              ? `Viewing ${userData.savedGroceries[0]?.groceryLines?.length} saved ${
+                  userData.savedGroceries[0]?.groceryLines?.length === 1 ? 'grocery' : 'groceries'
                 }:`
-              : 'You have not saved any inventories!'}
+              : 'You have not saved any groceries!'}
           </h2>
           
-            {userData.savedInventories[0]?.inventoryLines.map((item) => {
+            {userData.savedGroceries[0]?.groceryLines.map((item) => {
               return (
                 <ul>
                     <li className="small">{item}</li>               
@@ -42,4 +42,4 @@ const SavedInventories = () => {
     );
   };
   
-  export default SavedInventories;
+  export default SavedGroceries;

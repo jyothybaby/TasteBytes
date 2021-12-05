@@ -75,3 +75,17 @@ export const SAVE_INVENTORY = gql`
     }
   }
 `;
+
+
+export const SAVE_GROCERY = gql`
+  mutation saveGrocery($groceryData: GroceryInput!) {
+    saveGrocery(groceryData: $groceryData) {
+      _id
+      username
+      email
+      savedGroceries {
+        groceryLines
+      }
+    }
+  }
+`;

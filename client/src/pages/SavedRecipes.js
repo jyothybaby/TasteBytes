@@ -47,7 +47,7 @@ const SavedRecipes = () => {
     <>
       <Jumbotron fluid className="text-light bg-dark">
         <Container>
-          <h1>Viewing {userData.username}'s recipes!</h1>
+          <h5>Viewing {userData.username}'s recipes!</h5>
         </Container>
       </Jumbotron>
       <Container>

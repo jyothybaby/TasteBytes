@@ -52,6 +52,18 @@ export const saveInventory = (inventoryData, token) => {
   });
 };
 
+// save grocery data for a logged in user
+export const saveGrocery = (groceryData, token) => {
+  return fetch('/api/users', {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+      authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify(groceryData),
+  });
+};
+
 // remove saved recipe data for a logged in user
 export const deleteRecipe = (recipeId, token) => {
   return fetch(`/api/users/recipes/${recipeId}`, {
