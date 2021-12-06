@@ -2,6 +2,8 @@ const express = require('express');
 const { ApolloServer } = require('apollo-server-express');
 const path = require('path');
 
+const cors = require('cors');
+
 const { typeDefs, resolvers } = require('./schemas');
 const { authMiddleware } = require('./utils/auth');
 const db = require('./config/connection');
@@ -27,6 +29,14 @@ if (process.env.NODE_ENV === 'production') {
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../client/build/index.html'));
 });
+
+// for the CORS Issue in heroku
+
+app.use(cors({
+  origin: `http://localhost:3000`,  //react's address
+  credentials: true
+}));
+
 
 db.once('open', () => {
   app.listen(PORT, () => {
