@@ -10,8 +10,8 @@ import { REMOVE_RECIPE, SAVE_GROCERY } from '../utils/mutations';
 
 const SavedRecipes = () => {
   const { loading, data } = useQuery(QUERY_ME);
-  const [removeRecipe, { error }] = useMutation(REMOVE_RECIPE);
-  const [saveGrocery, { error1 }] = useMutation(SAVE_GROCERY);
+  const [removeRecipe] = useMutation(REMOVE_RECIPE);
+  const [saveGrocery] = useMutation(SAVE_GROCERY);
 
   const userData = data?.me || {};
 
@@ -26,7 +26,7 @@ const SavedRecipes = () => {
       return false;
     }
     try {
-      const { data } = await removeRecipe({
+      await removeRecipe({
         variables: { recipeId },
       });
       // upon success, remove recipe's id from localStorage
@@ -44,7 +44,7 @@ const SavedRecipes = () => {
       return false;
     }
     try {
-      const { data } = await saveGrocery({
+      await saveGrocery({
         variables: { groceryData: outofStockList},
       });
       
@@ -90,7 +90,7 @@ const SavedRecipes = () => {
                 <Card.Body>
                   <Card.Title>{recipe.title}</Card.Title>
                   <ul>
-                    {recipe.ingredientLines.map(line=><li key={line.toString()}>{line}</li>)}
+                    {recipe.ingredientLines.map( (line, index) =><li key={index}>{line}</li>)}
                   </ul>
                   <Card.Text><b>Ingredients:</b> {recipe.ingredients.join(', ')}</Card.Text>
                   <Card.Text><b>Source:</b> {recipe.source}</Card.Text>

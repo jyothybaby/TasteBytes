@@ -17,7 +17,7 @@ const SearchRecipes = () => {
   // create state to hold saved recipeId values
   const [savedRecipeIds, setSavedRecipeIds] = useState(getSavedRecipeIds());
 
-  const [saveRecipe, { error }] = useMutation(SAVE_RECIPE);
+  const [saveRecipe] = useMutation(SAVE_RECIPE);
 
   // set up useEffect hook to save `savedRecipeIds` list to localStorage on component unmount
   // learn more here: https://reactjs.org/docs/hooks-effect.html#effects-with-cleanup
@@ -73,7 +73,7 @@ const SearchRecipes = () => {
     }
 
     try {
-      const { data } = await saveRecipe({
+      await saveRecipe({
         variables: { recipeData: { ...recipeToSave } },
       });
       console.log(savedRecipeIds);
@@ -129,7 +129,7 @@ const SearchRecipes = () => {
                 <Card.Body>
                   <Card.Title>{recipe.title}</Card.Title>
                   <ul>
-                    {recipe.ingredientLines.map(line=> <li key={line.toString()}>{line}</li>)}
+                    {recipe.ingredientLines.map((line,index) => <li key={index}>{line}</li>)}
                   </ul>
                   <Card.Text><b>Ingredients:</b> {recipe.ingredients.join(', ')}</Card.Text>
                   <Card.Text><b>Source:</b> {recipe.source}</Card.Text>

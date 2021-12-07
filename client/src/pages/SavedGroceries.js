@@ -7,7 +7,7 @@ import { SAVE_INVENTORY } from '../utils/mutations';
 
 const SavedGroceries = () => {
     const { loading, data } = useQuery(QUERY_GROCERY);
-    const [saveInventory, { error }] = useMutation(SAVE_INVENTORY);
+    const [saveInventory] = useMutation(SAVE_INVENTORY);
     
     const userData = data?.me || {};
    
@@ -23,7 +23,7 @@ const SavedGroceries = () => {
         return false;
       }
       try {
-        const { data } = await saveInventory({
+        await saveInventory({
           variables: { inventoryData: shoppingList},
         });
         
@@ -47,14 +47,11 @@ const SavedGroceries = () => {
                 }:`
               : 'You have not saved any groceries!'}
           </h2>
-          
-            {userData.savedGroceries?.map((item) => {
-              return (
-                <ul>
-                    <li className="small">{item}</li>               
-                  </ul>
-                 );
-            })}
+          <ul>
+            {userData.savedGroceries?.map((item, index) => 
+                <li className="small" key={index}>{item}</li>               
+            )}
+          </ul>
            { userData.savedGroceries?.length > 0 ?
             <Button 
                       onClick={() => handleSavetoInventory(userData.savedGroceries)}

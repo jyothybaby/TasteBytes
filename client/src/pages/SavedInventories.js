@@ -1,7 +1,6 @@
 import React from 'react';
 import { Jumbotron, Container } from 'react-bootstrap';
-import Auth from '../utils/auth';
-import { useQuery, useMutation } from '@apollo/client';
+import { useQuery } from '@apollo/client';
 import { QUERY_INVENTORY } from '../utils/queries';
 
 const SavedInventories = () => {
@@ -28,15 +27,11 @@ const SavedInventories = () => {
                 }:`
               : 'You have not saved any inventories!'}
           </h2>
-          
-            {userData.savedInventories?.map((item) => {
-              return (
-                <ul>
-                    <li className="small">{item}</li>               
-                  </ul>
-                 );
-            })}
-          
+          <ul>
+            {userData.savedInventories?.map((item, index) => 
+                    <li className="small" key={index}>{item}</li>               
+            )}
+          </ul>
         </Container>
       </>
     );
