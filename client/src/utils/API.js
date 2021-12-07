@@ -52,6 +52,18 @@ export const saveInventory = (inventoryData, token) => {
   });
 };
 
+// save inventory data for a logged in user
+export const removeInventory = (inventoryData, token) => {
+  return fetch('/api/users', {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+      authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify(inventoryData),
+  });
+};
+
 // save grocery data for a logged in user
 export const saveGrocery = (groceryData, token) => {
   return fetch('/api/users', {
@@ -74,8 +86,4 @@ export const deleteRecipe = (recipeId, token) => {
   });
 };
 
-// make a search to google recipes api
-// https://www.googleapis.com/recipes/v1/volumes?q=harry+potter
-export const searchGoogleRecipes = (query) => {
-  return fetch(`https://www.googleapis.com/recipes/v1/volumes?q=${query}`);
-};
+

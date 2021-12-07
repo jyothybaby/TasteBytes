@@ -19,7 +19,7 @@ const SavedGroceries = () => {
 
       // Get all the items already bought to be added to inventory
       var alreadyBought = [];
-      var markedCheckbox = document.getElementsByName('pl');  
+      var markedCheckbox = document.getElementsByName('shoppingItemChkbox');  
       for (var checkbox of markedCheckbox) {  
         if (checkbox.checked)  
           alreadyBought.push(checkbox.value);   
@@ -37,12 +37,15 @@ const SavedGroceries = () => {
         });
 
         //workaround to reset the state
-        markedCheckbox = document.getElementsByName('pl');  
-        for (var checkbox of markedCheckbox) {  
-          checkbox.checked = false;  
+        markedCheckbox = document.getElementsByName('shoppingItemChkbox');  
+        for (var chkbox of markedCheckbox) {  
+          chkbox.checked = false;  
         }
+
+        alert('Shopping list updated successfully')
         
       } catch (err) {
+        alert('Error occured')
         console.error(err);
       }
     };
@@ -65,7 +68,7 @@ const SavedGroceries = () => {
           <div>
             {userData.savedGroceries?.map((item, index) => 
               <div key={index}>
-                <input type='checkbox' name='pl' value={item}/> {item}
+                <input type='checkbox' name='shoppingItemChkbox' value={item}/> {item}
               </div>
             )}
           </div>

@@ -1,16 +1,55 @@
 import React from 'react';
-import { Jumbotron, Container } from 'react-bootstrap';
-import { useQuery } from '@apollo/client';
+import { Jumbotron, Container, Button } from 'react-bootstrap';
+import Auth from '../utils/auth';
+import { useQuery, useMutation } from '@apollo/client';
 import { QUERY_INVENTORY } from '../utils/queries';
+import { REMOVE_INVENTORY } from '../utils/mutations';
 
 const SavedInventories = () => {
     const { loading, data } = useQuery(QUERY_INVENTORY);
+    const [removeInventory] = useMutation(REMOVE_INVENTORY);
     
     const userData = data?.me || {};
    
     if (loading) {
       return <h2>LOADING...</h2>;
     }
+
+    
+    const handleRemoveInventory = async () => {
+
+      // Get all the items to be removed from inventory
+      var notInStock = [];
+      var markedCheckbox = document.getElementsByName('invItemChkbox');  
+      for (var checkbox of markedCheckbox) {  
+        if (checkbox.checked)  
+          notInStock.push(checkbox.value);   
+      }
+
+      // get token
+      const token = Auth.loggedIn() ? Auth.getToken() : null;
+  
+      if (!token) {
+        return false;
+      }
+      try {
+        await removeInventory({
+          variables: { inventoryData: notInStock},
+        });
+
+        //workaround to reset the state
+        markedCheckbox = document.getElementsByName('invItemChkbox');  
+        for (var chkbox of markedCheckbox) {  
+          chkbox.checked = false;  
+        }
+
+        alert('Inventory list updated successfully')
+        
+      } catch (err) {
+        alert('Error occured')
+        console.error(err);
+      }
+    };
   
     return (
       <>
@@ -27,11 +66,19 @@ const SavedInventories = () => {
                 }:`
               : 'You have not saved any inventories!'}
           </h2>
-          <ul>
+          <div>
             {userData.savedInventories?.map((item, index) => 
-                    <li className="small" key={index}>{item}</li>               
+              <div key={index}>
+                <input type='checkbox' name='invItemChkbox' value={item}/> {item}
+              </div>
             )}
-          </ul>
+          </div>
+          { userData.savedInventories?.length > 0 ?
+            <Button 
+                      onClick={() => handleRemoveInventory()}
+                    >Out of Stock? Remove From Inventory List.
+            </Button> : null
+            }
         </Container>
       </>
     );

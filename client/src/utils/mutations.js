@@ -75,6 +75,17 @@ export const SAVE_INVENTORY = gql`
   }
 `;
 
+export const REMOVE_INVENTORY = gql`
+  mutation removeInventory($inventoryData: [String]!) {
+    removeInventory(inventoryData: $inventoryData) {
+      _id
+      username
+      email
+      savedInventories 
+    }
+  }
+`;
+
 
 export const SAVE_GROCERY = gql`
   mutation saveGrocery($groceryData: [String]!) {

@@ -84,7 +84,7 @@ module.exports = {
     }
   },
 
-  // save an inventory to a user's "savedInventoies" fileld by adding it to the set (to prevent duplicates)
+  // save an inventory to a user's "savedInventories" fileld by adding it to the set (to prevent duplicates)
   async saveInventory({ user, body }, res) {
     try {
       const updatedUser = await User.findOneAndUpdate(
@@ -92,6 +92,23 @@ module.exports = {
         { 
           $addToSet: { savedInventories: { $each: body} },
           $pull: {savedGroceries: { $in: body}}
+        },
+        { new: true, runValidators: true }
+      );
+      return res.json(updatedUser);
+    } catch (err) {
+      console.log(err);
+      return res.status(400).json(err);
+    }
+  },
+
+  // remove an inventory to a user's from "savedInventories" 
+  async removeInventory({ user, body }, res) {
+    try {
+      const updatedUser = await User.findOneAndUpdate(
+        { _id: user._id },
+        { 
+          $pull: {savedInventories: { $in: body}}
         },
         { new: true, runValidators: true }
       );
