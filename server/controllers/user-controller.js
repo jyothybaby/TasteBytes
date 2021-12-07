@@ -45,7 +45,6 @@ module.exports = {
   // save a recipe to a user's `savedRecipes` field by adding it to the set (to prevent duplicates)
   // user comes from `req.user` created in the auth middleware function
   async saveRecipe({ user, body }, res) {
-    console.log(user);
     try {
       const updatedUser = await User.findOneAndUpdate(
         { _id: user._id },
@@ -72,7 +71,6 @@ module.exports = {
   },
 // Save an grocery list to a user's savedIGroceries
   async saveGrocery({ user, body }, res) {
-    console.log(user);
     try {
       const updatedUser = await User.findOneAndUpdate(
         { _id: user._id },
@@ -88,13 +86,12 @@ module.exports = {
 
   // save an inventory to a user's "savedInventoies" fileld by adding it to the set (to prevent duplicates)
   async saveInventory({ user, body }, res) {
-    console.log(user);
     try {
       const updatedUser = await User.findOneAndUpdate(
         { _id: user._id },
         { 
           $addToSet: { savedInventories: { $each: body} },
-          $set: {savedGroceries: []}
+          $pull: {savedGroceries: { $in: body}}
         },
         { new: true, runValidators: true }
       );

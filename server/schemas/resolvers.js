@@ -83,7 +83,7 @@ const resolvers = {
           { _id: context.user._id },
           { 
             $addToSet: { savedInventories: { $each: inventoryData} },
-            $set: {savedGroceries: []}
+            $pull: {savedGroceries: { $in: inventoryData}}
           },
           { new: true }
         );

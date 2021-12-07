@@ -47,9 +47,10 @@ const SavedRecipes = () => {
       await saveGrocery({
         variables: { groceryData: outofStockList},
       });
-      
+      alert('Added Successfully')      
     } catch (err) {
-      console.error(err);
+      alert('Error while adding') 
+      console.log(err)
     }
   };
 

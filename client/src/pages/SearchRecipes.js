@@ -76,7 +76,6 @@ const SearchRecipes = () => {
       await saveRecipe({
         variables: { recipeData: { ...recipeToSave } },
       });
-      console.log(savedRecipeIds);
       setSavedRecipeIds([...savedRecipeIds, recipeToSave.recipeId]);
     } catch (err) {
       console.error(err);

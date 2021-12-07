@@ -15,7 +15,16 @@ const SavedGroceries = () => {
       return <h2>LOADING...</h2>;
     }
 
-    const handleSavetoInventory = async (shoppingList) => {
+    const handleSavetoInventory = async () => {
+
+      // Get all the items already bought to be added to inventory
+      var alreadyBought = [];
+      var markedCheckbox = document.getElementsByName('pl');  
+      for (var checkbox of markedCheckbox) {  
+        if (checkbox.checked)  
+          alreadyBought.push(checkbox.value);   
+      }
+
       // get token
       const token = Auth.loggedIn() ? Auth.getToken() : null;
   
@@ -24,14 +33,20 @@ const SavedGroceries = () => {
       }
       try {
         await saveInventory({
-          variables: { inventoryData: shoppingList},
+          variables: { inventoryData: alreadyBought},
         });
+
+        //workaround to reset the state
+        markedCheckbox = document.getElementsByName('pl');  
+        for (var checkbox of markedCheckbox) {  
+          checkbox.checked = false;  
+        }
         
       } catch (err) {
         console.error(err);
       }
     };
-  
+
     return (
       <>
         <Jumbotron fluid className="text-light bg-dark">
@@ -47,14 +62,16 @@ const SavedGroceries = () => {
                 }:`
               : 'You have not saved any groceries!'}
           </h2>
-          <ul>
+          <div>
             {userData.savedGroceries?.map((item, index) => 
-                <li className="small" key={index}>{item}</li>               
+              <div key={index}>
+                <input type='checkbox' name='pl' value={item}/> {item}
+              </div>
             )}
-          </ul>
+          </div>
            { userData.savedGroceries?.length > 0 ?
             <Button 
-                      onClick={() => handleSavetoInventory(userData.savedGroceries)}
+                      onClick={() => handleSavetoInventory()}
                     >Already Bought? Add To Inventory List.
             </Button> : null
             }
