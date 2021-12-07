@@ -5,10 +5,15 @@
 ![GitHub license](https://img.shields.io/badge/license-MIT-yellow.svg)
 
 ## Description
-   TasteBytes is an online application where you can search for the recipe, plan food for the coming week and buy the groceries accordingly and manage the kitchen inventories.
+   Taste Bytes is a web application where you can search for popular recipes, plan meal preparation for the coming week, identify out of stock groceries for shopping and manage the kitchen inventory.
+
+## Motivation
+    Upfront planning on next week meals will help a big family (with kids) enjoy variety in their meals and will save a lot of time with intelligent shopping and inventory management.
+
 
 ## User Story
-    As a Busy Mom I WANT to login into a webpage that will give me an option to search for recipe. SO THAT I can have a quick access to my favorite recipe, shopping list and inventory lists.
+  As a Busy Mom, I WANT an intelligent web application that will assist with meal planning and kitchen inventory management, SO THAT I can search for popular recipes, plan meal preparation for the coming week, identify out of stock groceries for shopping and manage the kitchen inventory.
+
 
 
 ## Table of Contents
